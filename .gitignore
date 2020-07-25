@@ -3,3 +3,6 @@
 #### VIM Editor
 **~
 **.un~
+**.swp
+.DS_Store
+
