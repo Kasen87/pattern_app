@@ -4,42 +4,51 @@
  * Bring the Guest to life
  */
 
-export class Guest {
-	constructor(name='Kevin') {
-		this.name = name;
-		this.providers = [];
+import BaseSubject from "./private/base_subject.mjs";
+
+export default class Guest extends BaseSubject {
+	constructor({ name = "Kevin" }) {
+		super({name: name})
+
+		this.isThirsty = false;
 	}
 
-	introduceSelf() {
-		console.log(`Hello, my name is ${this.name}.`);
-	}
-
-	yourName() {
-		return this.name;
-	}
-
-	letThemKnow(whatToSay='Hey!'){
-		if ( this.providers.length > 0 ) {
-			this.providers.forEach((provider) => {
-				provider.letMeKnow(this);
-			})
+	myState() {
+		return {
+			isThirsty: this.isThirsty,
 		}
+	};
+
+	sitDown({ table = null }) {
+		if (!table) { return };
+
+		table.guest = this.name;
 	}
 
-	sitsDown() {
-		console.log(`${this.name} sits down.`);
+	isWaiting({ seconds = 1 }) {
+		setTimeout(() => {
+			return this.becameThirsty();
+		}, seconds * 1000)
 	}
 
-	needSomething(myProvider=null) {
-		if ( !myProvider ) { return; }
-		console.log(`${this.name} thinks: Ok, I will let them know if I need anything.`);
-		this.providers.push(myProvider);
+	drinkWater() {
+		this.isThirsty = false;
+
+		return this.statusChanged();
 	}
 
-	isWaiting(seconds=5) {
-		for (let i = 0; i < seconds; i++) {
-			console.log('...');
+	becameThirsty() {
+		this.isThirsty = true;
+
+		return this.statusChanged();
+	}
+
+	statusChanged() {
+		let data = {
+			name: this.name,
+			state: this.myState()
 		}
-		this.letThemKnow(`I'm thirsty`);
+
+		return super.notifyObservers({ notificationPayload: data });
 	}
 }
