@@ -4,23 +4,31 @@
  * Bring the Waiter to life
  */
 
-export class Waiter {
-	constructor(name='Jessie') {
-		this.name = name;
+import BaseObserver from "./private/base_observer.mjs";
+
+export default class Waiter extends BaseObserver {
+	constructor( name = "Waiter" ) {
+		super({ name: name })
+
+		this.tablesToWatch = [];
 	}
 
-	introduceSelf(myPatron=null) {
-		if ( !myPatron ) { return; }
+	addTable({ table = null }) {
+		if (!table) { return };
 
-		console.log(`Hello, my name is ${this.name}.`);
-		myPatron.introduceSelf();
-
-		console.log(`Pleasure to have you here with us. I'll be nearby, so let me know if you need anything.`);
-
-		myPatron.needSomething(this);
+		this.tablesToWatch.push(table)
 	}
 
-	letMeKnow(myPatron=null) {
-		console.log(`Looks like ${myPatron.yourName()} needs something!`);
+	notificationMethod( payload = null ) {
+		if (!payload) { return; }
+
+		this.placeWater({name: payload.name})
+	}
+
+	placeWater({ name = null }) {
+		let tableToWater = this.tablesToWatch.find(element => element.guest === name)
+		if (!tableToWater) { return; }
+
+		tableToWater.hasWater = true;
 	}
 }
