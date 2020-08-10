@@ -4,11 +4,13 @@
  */
 import Guest from "./actors/Guest.mjs";
 import Waiter from "./actors/Waiter.mjs";
+import Bartender from "./actors/Bartender.mjs";
 
 console.log("Hey there! Welcome to the Restaurant!");
 
 let guestGareth = new Guest({ name: "Gareth" });
 let waiterWanda = new Waiter("Wanda");
+let bartenderBenny = new Bartender("Benny");
 
 let diningTable = {
   id: 1,
@@ -19,4 +21,5 @@ let diningTable = {
 guestGareth.sitDown({ table: diningTable })
 waiterWanda.addTable({ table: diningTable });
 waiterWanda.observeSubject({ subject: guestGareth })
+bartenderBenny.observeSubject({ subject: guestGareth })
 guestGareth.isWaiting({ seconds: 1 });

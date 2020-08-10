@@ -3,24 +3,13 @@
  *
  * Bring the Bartender to life
  */
-
-export class Bartender {
+import BaseObserver from './private/base_observer.mjs'
+export default class Bartender extends BaseObserver {
 	constructor(name='Alex') {
-		this.name = name;
+		super({name: name});
 	}
 
-	introduceSelf(myPatron=null) {
-		if ( !myPatron ) { return; }
-		console.log(`Hello, my name is ${this.name}.`);
-		myPatron.introduceSelf();
-
-		console.log(`If you need anything, let me know. I'll be around the bar.`);
-
-		myPatron.needSomething(this);
+	notificationMethod( payload = null ) {
+		console.log(`Bartender Benny was notified that ${payload.name} is thirsty: ${payload.state.isThirsty}`)
 	}
-
-	letMeKnow(myPatron=null) {
-		console.log(`Ah, ok! Looks like ${myPatron.yourName()} needs something!`);
-	}
-
 }
