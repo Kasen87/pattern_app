@@ -2,30 +2,21 @@
  *
  * Start the environment
  */
-import {Guest} from './actors/Guest.mjs';
-import {Waiter} from './actors/Waiter.mjs';
-import {Bartender} from './actors/Bartender.mjs';
+import Guest from "./actors/Guest.mjs";
+import Waiter from "./actors/Waiter.mjs";
 
-console.log(`Hey there! Welcome to the Restaurant!`);
+console.log("Hey there! Welcome to the Restaurant!");
 
-let guestGareth = new Guest('Gareth');
-guestGareth.sitsDown();
+let guestGareth = new Guest({ name: "Gareth" });
+let waiterWanda = new Waiter("Wanda");
 
-let waiterWanda = new Waiter('Wanda');
+let diningTable = {
+  id: 1,
+  guest: null,
+  hasWater: false,
+}
 
-waiterWanda.introduceSelf(guestGareth);
-
-let bartenderBernard = new Bartender('Bernard');
-
-bartenderBernard.introduceSelf(guestGareth);
-
-/* Gareth waits for 5 ticks
- *
- *
- * Gareth gets thirsty.
- *
- *
- * Gareth lets them know of his thirst.
- */
-
-guestGareth.isWaiting(5);
+guestGareth.sitDown({ table: diningTable })
+waiterWanda.addTable({ table: diningTable });
+waiterWanda.observeSubject({ subject: guestGareth })
+guestGareth.isWaiting({ seconds: 1 });
