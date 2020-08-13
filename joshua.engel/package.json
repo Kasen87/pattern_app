@@ -1,0 +1,21 @@
+{
+  "name": "design.patterns_joshua.engel",
+  "version": "1.0.0",
+  "description": "A collection of design patterns in practice to learn more about them.",
+  "private": true,
+  "main": "",
+  "scripts": {
+    "test": "",
+    "observer": "node observer/Restaurant.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kasen87/pattern_app.git"
+  },
+  "author": "Joshua R. Engel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kasen87/pattern_app/issues"
+  },
+  "homepage": "https://github.com/Kasen87/pattern_app#readme"
+}
