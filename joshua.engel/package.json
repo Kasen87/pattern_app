@@ -2,6 +2,7 @@
   "name": "design.patterns_joshua.engel",
   "version": "1.0.0",
   "description": "A collection of design patterns in practice to learn more about them.",
+  "private": true,
   "main": "",
   "scripts": {
     "test": "",
