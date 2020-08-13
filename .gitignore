@@ -1,8 +1,7 @@
 ## Gitignore basics
-
+node_modules/
 #### VIM Editor
 **~
 **.un~
 **.swp
 .DS_Store
-
