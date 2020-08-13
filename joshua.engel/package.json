@@ -4,6 +4,7 @@
   "description": "A collection of design patterns in practice to learn more about them.",
   "private": true,
   "main": "",
+  "type": "module",
   "scripts": {
     "test": "",
     "observer": "node observer/Restaurant.mjs"
