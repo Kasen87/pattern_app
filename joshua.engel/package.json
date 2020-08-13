@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Kasen87/pattern_app#readme",
   "dependencies": {
     "yarn": "^1.22.4"
+  },
+  "devDependencies": {
+    "jest": "^26.4.0"
   }
 }
