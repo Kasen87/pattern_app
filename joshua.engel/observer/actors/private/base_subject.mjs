@@ -11,18 +11,15 @@ export default class BaseSubject {
   }
 
   attachObserver({ name = "", notificationMethod = null }) {
-    console.log(name, "Attaching...")
     this.observers.push({
       name: name,
       notify: notificationMethod
     });
-    console.log("Current Observer Array:", this.observers)
   }
 
   detachObserver({ name = "" }) {
-    console.log(name, "Detaching...")
     let remainingObservers = this.observers.flatMap( observer => {
-      observer.name === name ? [] : observer
+      return observer.name === name ? [] : observer
     });
 
     this.observers = remainingObservers;
@@ -32,7 +29,7 @@ export default class BaseSubject {
     let observersToNotify = this.observers
 
     observersToNotify.forEach( observer => {
-      observer.notify(notificationPayload)
+      observer?.notify(notificationPayload)
     });
   }
 }

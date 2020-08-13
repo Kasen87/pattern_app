@@ -7,7 +7,7 @@
 import BaseObserver from "./private/base_observer.mjs";
 
 export default class Waiter extends BaseObserver {
-	constructor( name = "Waiter" ) {
+	constructor({ name = "Waiter" }) {
 		super({ name: name })
 
 		this.tablesToWatch = [];
@@ -27,6 +27,7 @@ export default class Waiter extends BaseObserver {
 
 	placeWater({ name = null }) {
 		let tableToWater = this.tablesToWatch.find(element => element.guest === name)
+
 		if (!tableToWater) { return; }
 
 		tableToWater.hasWater = true;

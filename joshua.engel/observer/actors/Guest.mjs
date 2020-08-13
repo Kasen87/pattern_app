@@ -16,8 +16,13 @@ export default class Guest extends BaseSubject {
 	myState() {
 		return {
 			isThirsty: this.isThirsty,
+			newStatusString: this.myStringifiedThirst(),
 		}
 	};
+
+	myStringifiedThirst() {
+		return this.isThirsty ? "is thirsty" : "is not thirsty"
+	}
 
 	sitDown({ table = null }) {
 		if (!table) { return };

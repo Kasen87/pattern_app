@@ -24,7 +24,11 @@ export default class BaseObserver {
   observerDetails() {
     return {
       name: this.name,
-      notificationMethod: ( payload ) => { return this.notificationMethod(payload) }
+      notificationMethod: ( payload ) => {
+        console.log(`${this.name} was told that ${payload.name} ${payload.state.newStatusString}.`);
+
+        return this.notificationMethod(payload);
+      }
     }
   }
 }
