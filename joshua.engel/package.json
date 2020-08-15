@@ -6,7 +6,7 @@
   "main": "",
   "type": "module",
   "scripts": {
-    "test": "",
+    "test": "mocha",
     "observer": "node observer/Restaurant.mjs"
   },
   "repository": {
@@ -21,5 +21,8 @@
   "homepage": "https://github.com/Kasen87/pattern_app#readme",
   "dependencies": {
     "yarn": "^1.22.4"
+  },
+  "devDependencies": {
+    "mocha": "^8.1.1"
   }
 }
