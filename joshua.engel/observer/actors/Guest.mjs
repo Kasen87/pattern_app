@@ -51,7 +51,7 @@ export default class Guest extends BaseSubject {
 	statusChanged() {
 		let data = {
 			name: this.name,
-			state: this.myState()
+			getCurrentState: () => { return this.myState() }
 		}
 
 		return super.notifyObservers({ notificationPayload: data });
