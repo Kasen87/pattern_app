@@ -5,22 +5,30 @@
  */
 
 class Manager {
-  constructor() {
-    if (!Manager.instance) {
-      this._data = []
-      Manager.instance = this;
-    }
-
-    return Manager.instance;
+  constructor( startingData = [] ) {
+    this._data = startingData;
   }
 
   add(item) {
     this._data.push(item)
   }
+
+  get() {
+    return Manager.instance;
+  }
 }
 
-const MANAGER = new Manager();
+let newManagerInstance = (data) => {
+  if (Manager.instance) { return Manager.instance };
 
-Object.freeze(MANAGER);
+  let newInstance = new Manager(data);
 
-export default MANAGER;
+  Object.freeze(newInstance);
+  Manager.instance = newInstance;
+
+  return Manager.instance;
+}
+
+export const MANAGER = {
+  new: (data) => { return newManagerInstance(data); }
+}
