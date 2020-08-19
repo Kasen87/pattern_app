@@ -9,7 +9,9 @@ class Manager {
     this._data = startingData;
   }
 
-  add(item) {
+  add(item = false) {
+    if (item === false) { throw new TypeError() }
+
     this._data.push(item)
   }
 
@@ -22,7 +24,6 @@ let newManagerInstance = (data) => {
   if (Manager.instance) { return Manager.instance };
 
   let newInstance = new Manager(data);
-
   Object.freeze(newInstance);
   Manager.instance = newInstance;
 
