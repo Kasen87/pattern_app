@@ -3,8 +3,8 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
     create_table :subscriptions do |t|
       t.string :observerType
       t.integer :observerId
-      t.sstring :subjectType
-      t.integer :subsjectId
+      t.string :subjectType
+      t.integer :subjectId
 
       t.timestamps
     end
