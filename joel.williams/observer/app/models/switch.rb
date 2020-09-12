@@ -1,5 +1,14 @@
 class Switch < ApplicationRecord
-  attr_accessor :on, :type
+
+  def set_default
+    self.update type: "Switch"
+    self.update on: false
+  end
+
+  def initialize(args)
+    super
+    self.set_default
+  end
 
   def plug_in(observerType, observerId)
     attach(observerType, observerId)
@@ -11,8 +20,7 @@ class Switch < ApplicationRecord
 
 
   def flip
-    # TODO: add Pry and check here to see why ON isn't changing value
-    self.on = !on
+    self.update on: !on
     notify()
   end
 
@@ -31,8 +39,6 @@ class Switch < ApplicationRecord
   # these methods belong to a Subject
   # private
     
-  # TODO: Migration defaults are only soft-set.
-  # shows in full instance object but not when calling X.on or X.type
     def attach(observerType, observerId)
       subscription = Subscription.create(observerType: observerType, observerId: observerId, subjectType: self.type, subjectId: self.id)
     end
@@ -42,9 +48,12 @@ class Switch < ApplicationRecord
       Subscription.destroy(subscription.id)
     end
 
-    def notify()
-      Subscription.all.each do | sub |
-        self.convert_to_model(sub.observerType).find_by(id: sub.observerId).update(self.type, self.id)
+    def notify() 
+      # TODO: this is returning single entity not array - check AR options
+      Subscription.where(subjectId: self.id).each do | sub |
+        self.convert_to_model(sub.observerType)
+        .find(sub.observerId)
+        .updateObserver(self.type, self.id)
     end
 
   end

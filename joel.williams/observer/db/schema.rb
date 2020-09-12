@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_030449) do
 
   create_table "lamps", force: :cascade do |t|
     t.boolean "on", default: false
+    t.string "type", default: "Lamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
