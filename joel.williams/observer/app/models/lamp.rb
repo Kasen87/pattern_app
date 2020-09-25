@@ -1,14 +1,7 @@
 class Lamp < ApplicationRecord
 
-  def set_default
-    self.update type: "Lamp"
-    self.update on: false
-  end
-
-  def initialize(args = {})
-    super
-    self.set_default
-  end
+  attribute :type, :string, default: "Lamp"
+  attribute :on, :boolean, default: false
 
    # TODO: dupe code - move to helper
    def convert_to_model(modelName)

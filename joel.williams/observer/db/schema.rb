@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2020_09_05_030449) do
   enable_extension "plpgsql"
 
   create_table "lamps", force: :cascade do |t|
-    t.boolean "on", default: false
-    t.string "type", default: "Lamp"
+    t.boolean "on"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_09_05_030449) do
   end
 
   create_table "switches", force: :cascade do |t|
-    t.boolean "on", default: false
-    t.string "type", default: "Switch"
+    t.boolean "on"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

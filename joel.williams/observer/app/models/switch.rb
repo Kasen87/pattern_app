@@ -1,14 +1,8 @@
 class Switch < ApplicationRecord
 
-  def set_default
-    self.update type: "Switch"
-    self.update on: false
-  end
+  attribute :type, :string, default: "Switch"
+  attribute :on, :boolean, default: false
 
-  def initialize(args)
-    super
-    self.set_default
-  end
 
   def plug_in(observerType, observerId)
     attach(observerType, observerId)
@@ -49,7 +43,6 @@ class Switch < ApplicationRecord
     end
 
     def notify() 
-      # TODO: this is returning single entity not array - check AR options
       Subscription.where(subjectId: self.id).each do | sub |
         self.convert_to_model(sub.observerType)
         .find(sub.observerId)
