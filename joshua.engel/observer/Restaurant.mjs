@@ -2,30 +2,35 @@
  *
  * Start the environment
  */
-import {Guest} from './actors/Guest.mjs';
-import {Waiter} from './actors/Waiter.mjs';
-import {Bartender} from './actors/Bartender.mjs';
+import Guest from "./actors/Guest.mjs";
+import Waiter from "./actors/Waiter.mjs";
+import Bartender from "./actors/Bartender.mjs";
 
-console.log(`Hey there! Welcome to the Restaurant!`);
+console.log("Hey there! Welcome to the Restaurant!");
 
-let guestGareth = new Guest('Gareth');
-guestGareth.sitsDown();
+let guestGareth = new Guest({ name: "Gareth" });
+let waiterWanda = new Waiter({ name: "Wanda" });
+let bartenderBenny = new Bartender({ name: "Benny" });
 
-let waiterWanda = new Waiter('Wanda');
+let diningTable = {
+  id: 1,
+  guest: null,
+  hasWater: false,
+}
 
-waiterWanda.introduceSelf(guestGareth);
+guestGareth.sitDown({ table: diningTable })
+waiterWanda.addTable({ table: diningTable });
+waiterWanda.observeSubject({ subject: guestGareth })
+bartenderBenny.observeSubject({ subject: guestGareth })
 
-let bartenderBernard = new Bartender('Bernard');
+console.log(`Is water on the table? \n\t A: ${diningTable.hasWater}`)
 
-bartenderBernard.introduceSelf(guestGareth);
+guestGareth.isWaiting({ seconds: 1 });
 
-/* Gareth waits for 5 ticks
- *
- *
- * Gareth gets thirsty.
- *
- *
- * Gareth lets them know of his thirst.
- */
+setTimeout(() => {
+  console.log(`After 1.5 seconds, is water on the table now? \n\t A: ${diningTable.hasWater}`)
 
-guestGareth.isWaiting(5);
+  bartenderBenny.ignoreSubject({ subject: guestGareth })
+
+  console.log("Thanks for visiting! Please come back with money and without COVID-19! 👋")
+}, 1500);
